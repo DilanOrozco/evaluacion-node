@@ -2,6 +2,7 @@ const CreateTiquetera = require('../../application/uses-cases/CreateTiquetera')
 const DeleteTiquetera = require('../../application/uses-cases/DeleteTiquetera')
 const GetTiqueteraById = require('../../application/uses-cases/GetTiqueteraById')
 const GetTiqueteras = require('../../application/uses-cases/GetTiqueteras')
+const UpdateTiquetera = require('../../application/uses-cases/UpdateTiquetera')
 const TiqueteraRepository = require('../repositories/TiqueteraRepository')
 
 
@@ -47,5 +48,17 @@ const deleteTiquetera = async (req, res) => {
     }
 }
 
+const updateTiquetera = async(req, res)=>{
+    try{
+        const {id} = req.params
+        const updateTiqueteraUC = new UpdateTiquetera(TiqueteraRepositoryUC)
+        const tiquetera = await updateTiqueteraUC.execute(id, req.body)
+        return res.json(tiquetera)
 
-module.exports = { createTiquetera, getTiqueteras, getTiqueteraById, deleteTiquetera }
+    }catch(err){
+        res.status(500).json({Error : err.message})
+    }
+}
+
+
+module.exports = { createTiquetera, getTiqueteras, getTiqueteraById, deleteTiquetera, updateTiquetera }

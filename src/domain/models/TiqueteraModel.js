@@ -10,6 +10,9 @@ const tiqueteraSchema = new mongoose.Schema({
     saldo : {
         type: Number
     },
+    observaciones : {
+        type : String
+    },
     TotalTransacciones : {
         type : Number
     }
